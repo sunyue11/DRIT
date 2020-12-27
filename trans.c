@@ -29,7 +29,7 @@ void transpose_submit(int M, int N, int A[N][M], int B[M][N])
             for(j=0;j<4;j++){
                 for(k=i*8;k<(i+1)*8;k++){
                     h=j*8;
-                    a1=A[k][h];//以下会从矩阵A中读取数据
+                    a1=A[k][h];//将高速缓存中矩阵A的元素读取出来。
 					a2=A[k][h+1];
 					a3=A[k][h+2];
 					a4=A[k][h+3];
@@ -38,7 +38,7 @@ void transpose_submit(int M, int N, int A[N][M], int B[M][N])
 					a7=A[k][h+6];
 					a8=A[k][h+7];
 
-                    B[h][k]=a1;//这里B会覆盖A的内容，然后开始保存数据
+                    B[h][k]=a1;//将对应B矩阵中的位置替换成a的矩阵的元素。读取的都是在一个高速缓存中的。
 					B[h+1][k]=a2;
 					B[h+2][k]=a3;
 					B[h+3][k]=a4;
